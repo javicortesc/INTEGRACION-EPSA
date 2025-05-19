@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Extraportuario - EPSA</title>
+    <title>Simulador Integración Extraportuario - EPSA</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Podrías añadir un favicon aquí -->
+    <!-- <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}"> -->
 </head>
 <body>
     <header>
-        <img src="https://www.puertosanantonio.com/themes/custom/ Antônio/logo.svg" alt="Puerto San Antonio Logo" id="logo">
-        <h1>Especificación técnica para la integración Extraportuarios – EPSA</h1>
+        <!-- Si tienes un logo SVG o PNG que sea blanco o adaptable, mejor -->
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Puerto San Antonio Logo" id="logo">
+        <h1>Integración Extraportuarios – EPSA</h1>
         <p id="app-version">{{ app_version }}</p>
     </header>
 
@@ -17,29 +20,29 @@
         <div class="container">
             <h2>Panel de Control Extraportuario</h2>
 
-            <div class="form-section">
+            <section class="form-section">
                 <h3>1. Avisar Camión Listo para Salir</h3>
                 <form id="avisoCamionForm">
                     <div>
                         <label for="licencePlate">Patente Camión:</label>
-                        <input type="text" id="licencePlate" name="licencePlate" value="AABB11" required>
+                        <input type="text" id="licencePlate" name="licencePlate" value="AABB11" placeholder="Ej: CCDD22" required>
                     </div>
                     <div>
                         <label for="containerId">ID Contenedor:</label>
-                        <input type="text" id="containerId" name="containerId" value="TEST1234567" required>
+                        <input type="text" id="containerId" name="containerId" value="TEST1234567" placeholder="Ej: SUDU1234567" required>
                     </div>
                     <div>
                         <label for="isocode">ISO Code Contenedor (4 car.):</label>
-                        <input type="text" id="isocode" name="isocode" value="22G1" maxlength="4" required>
+                        <input type="text" id="isocode" name="isocode" value="22G1" placeholder="Ej: 45G1" maxlength="4" required>
                     </div>
                     <button type="submit">Enviar Aviso a EPSA</button>
                 </form>
-            </div>
+            </section>
 
-            <div class="status-section">
+            <section class="status-section">
                 <h3>2. Estado del Trámite</h3>
                 <div id="statusMessages">
-                    <p>Esperando acciones...</p>
+                    <p class="status-info">Esperando acciones...</p>
                 </div>
                 <div id="currentTruckInfo">
                     <h4>Información del Camión Actual:</h4>
@@ -49,22 +52,23 @@
                     <p><strong>Estado EPSA:</strong> <span id="currentEpsaStatus">-</span></p>
                     <p><strong>Mensaje EPSA:</strong> <span id="currentEpsaMessage">-</span></p>
                 </div>
-            </div>
+            </section>
 
-            <div class="actions-section">
+            <section class="actions-section">
                 <h3>3. Acciones Post-Autorización</h3>
-                <button id="confirmarSalidaBtn" disabled>Confirmar Salida del Camión</button>
-                <button id="eliminarAvisoBtn" disabled>Eliminar Aviso (Opcional)</button>
-            </div>
-             <div class="log-section">
-                <h3>Log de Eventos (Consola del Navegador y Flask)</h3>
-                <p>Revisar la consola del navegador (F12) y la terminal donde corre Flask para ver los logs detallados de las interacciones.</p>
-            </div>
+                <button id="confirmarSalidaBtn" disabled>Confirmar Salida</button>
+                <button id="eliminarAvisoBtn" class="secondary" disabled>Eliminar Aviso</button>
+            </section>
+
+            <section class="log-section">
+                <h3>Log de Eventos</h3>
+                <p>Para un seguimiento detallado, revisa la consola de desarrollador de tu navegador (F12 → Pestaña "Consola") y la terminal donde se ejecuta Flask.</p>
+            </section>
         </div>
     </main>
 
     <footer>
-        <p>Simulador basado en "Especificación técnica para la integración Extraportuarios – EPSA Mayo 2025 – Versión 2"</p>
+        <p>Simulador basado en "Especificación técnica para la integración Extraportuarios – EPSA {{ app_version }}"</p>
     </footer>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
